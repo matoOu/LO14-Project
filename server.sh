@@ -1,9 +1,9 @@
 #!/bin/bash
 
 declare -r FIFO=fifo
-declare -r PORT=$1
+declare -r port=$1
 
-if ! [[ $# = 1 && $PORT =~ ^[0-9]+$ ]]; then
+if ! [[ $# = 1 && $port =~ ^[0-9]+$ ]]; then
   echo "You have entered an invalid port, please choose another one"
   exit 1
 fi
@@ -23,7 +23,7 @@ function interaction() {
 done
 }
 
-echo "Port $PORT is up and running ..."
+echo "Port $port is up and running ..."
 while true; do
-  interaction < "FIFO" | netcat -l -k $PORT > "$FIFO"
+  interaction < "FIFO" | netcat -l -k $port > "$FIFO"
 done
